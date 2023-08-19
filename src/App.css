@@ -1,0 +1,76 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Karla", sans-serif;
+}
+:root {
+  --color-blop1: #c4eabe;
+  --color-blop2: #d4d8e7;
+  --color-title: #293264;
+  --color-button: #4d5b9e;
+  --color-button-hover: #1c2655;
+  --color-text: #293264;
+  --answer-click: #d4d8e7;
+  --answer-correct: #94d7a2;
+  --answer-wrong: #f7d9db;
+}
+html {
+  background-color: #f5f7fb;
+}
+
+.main {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  width: 100vw;
+}
+.start-game {
+  height: 100vh;
+}
+.main-text {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+  z-index: 10;
+}
+.title-quiz {
+  color: var(--color-title);
+  font-size: 40px;
+}
+.parag-quiz {
+  text-align: center;
+  font-size: 20px;
+}
+.start-button {
+  padding: 5% 15%;
+  color: white;
+  font-size: 18px;
+  border-style: none;
+  border-radius: 40px;
+  background-color: var(--color-button);
+  text-decoration: none;
+  transition: all 0.5s ease;
+}
+.error-button {
+  padding: 5% 15%;
+  border-radius: 40px;
+  text-decoration: none;
+  color: white;
+  background-color: var(--color-button);
+}
+
+.error-button:hover {
+  cursor: pointer;
+  font-weight: bold;
+  background-color: var(--color-button-hover);
+}
+.start-button:hover {
+  cursor: pointer;
+  font-weight: bold;
+  background-color: var(--color-button-hover);
+}
