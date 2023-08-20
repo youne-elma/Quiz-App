@@ -74,3 +74,80 @@ html {
   font-weight: bold;
   background-color: var(--color-button-hover);
 }
+
+/*-----------------------------SVG STYLING----------------------------------*/
+
+.gifBlop1 {
+  position: absolute;
+  right: 0;
+  top: 0;
+  z-index: 0;
+}
+.gifBlop2 {
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  z-index: 0;
+}
+.blop1 {
+  position: absolute;
+  right: 0;
+  top: 0;
+}
+.blop2 {
+  position: absolute;
+  left: 0;
+  top: 11%;
+}
+.blop3 {
+  position: absolute;
+  left: 0;
+  top: 0;
+}
+.blop4 {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+}
+.spike-image {
+  position: absolute;
+  height: 180px;
+  transform: rotate(20deg);
+  bottom: 10%;
+  right: 12%;
+}
+.volleyball-icon {
+  position: absolute;
+  height: 100px;
+  bottom: 10%;
+  left: 11%;
+}
+@media screen and (max-width: 550px) {
+  .gifBlop1 {
+    height: 32%;
+  }
+  .gifBlop2 {
+    height: 32%;
+  }
+  .blop1 {
+    height: 10%;
+  }
+  .blop2 {
+    height: 25%;
+  }
+  .blop3 {
+    height: 20%;
+  }
+  .blop4 {
+    height: 10%;
+  }
+  .spike-image {
+    right: 5%;
+    bottom: 3%;
+    height: 20%;
+  }
+  .volleyball-icon {
+    bottom: 15%;
+    height: 8%;
+  }
+}
