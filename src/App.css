@@ -151,3 +151,46 @@ html {
     height: 8%;
   }
 }
+
+/*-----------------------------Game page----------------------------------*/
+
+.loadingGif {
+  margin: 10% 0;
+  height: 200px;
+}
+.questions {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  flex-direction: column;
+  margin: 5% 10%;
+  gap: 1.2em;
+  z-index: 10;
+}
+.result {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 1em;
+  z-index: 10;
+}
+.result > p {
+  font-weight: bold;
+  text-align: center;
+  font-size: 20px;
+  color: var(--color-title);
+}
+.checkAnswer {
+  font-weight: bold;
+  border-radius: 40px;
+  cursor: pointer;
+  color: white;
+  border-style: none;
+  user-select: none;
+  background-color: var(--color-button);
+  padding: 0.8em 1em;
+  transition: all 0.2s ease;
+}
+.checkAnswer:hover {
+  background-color: var(--color-button-hover);
+}
