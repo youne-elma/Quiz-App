@@ -1,27 +1,52 @@
-# React + TypeScript + Vite
+# Quiz Project
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+This project is made with Html / Css / Typescript / Reactjs
 
-Currently, two official plugins are available:
+This is a complete Quiz game, fully optimized for _desktop_ and _mobile_, with a great design made also by me in Figma [QuizApp](https://www.figma.com/file/riVamF10d4X1GUIAZlvjEJ/quiz-app?type=design&node-id=0%3A1&mode=design&t=F1L1h4y2WNs8EWnc-1).
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+**Fetch API** : i used this API documentation (https://opentdb.com/api_config.php) to fetch all the questions and answers that i needed to my game.
 
-## Expanding the ESLint configuration
+> Home Page
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+![Home page, Quizzical App](/src/assets/Home-Page.png)
 
-- Configure the top-level `parserOptions` property like this:
+## Table of contents
 
-```js
-   parserOptions: {
-    ecmaVersion: 'latest',
-    sourceType: 'module',
-    project: ['./tsconfig.json', './tsconfig.node.json'],
-    tsconfigRootDir: __dirname,
-   },
-```
+1. [Demo](#Demo)
+2. [Technologies](#Technologies)
+3. [Features](#Features)
+4. [Development](#Development)
 
-- Replace `plugin:@typescript-eslint/recommended` to `plugin:@typescript-eslint/recommended-type-checked` or `plugin:@typescript-eslint/strict-type-checked`
-- Optionally add `plugin:@typescript-eslint/stylistic-type-checked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and add `plugin:react/recommended` & `plugin:react/jsx-runtime` to the `extends` list
+## Demo
+
+Here is the working live Demo: [https://github.com/youne-elma/Quiz-App]
+
+And here is the Figma Design i did by myself: [https://www.figma.com/file/riVamF10d4X1GUIAZlvjEJ/quiz-app?type=design&node-id=0%3A1&mode=design&t=F1L1h4y2WNs8EWnc-1]
+
+## Technologies
+
+- React components, ES6
+- Typescript
+- CSS
+- HTML
+
+## Features
+
+- Multiple Routes in the application.
+- Restart game (reset also the score).
+- Display score.
+- Blop style design.
+- Loading animation.
+- Cool css animation, Blop animation.
+
+> Game Page
+
+![Game Page](/src/images/Game-page.png)
+
+> Result Page
+
+![Result Page](/src/images/result-page.png)
+
+## Development
+
+To set up this App locally, clone this repo to your desktop and run `npm install` to install all dependencies. Then `npm start` to lunch the App.
