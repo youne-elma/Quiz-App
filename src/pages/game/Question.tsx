@@ -1,3 +1,4 @@
+import { useState } from "react";
 import ButtonGroups from "./ButtonGroups";
 
 interface Answer {
@@ -27,6 +28,12 @@ function Question({
   buttonGroup,
   setButtonGroup,
 }: QuestionProps) {
+  const [isActive, setIsActive] = useState<boolean[]>([
+    false,
+    false,
+    false,
+    false,
+  ]);
   const unicodeQ = item.question;
   const diffQuestions = unicodeQ
     .replace(/&quot;/g, '"')
@@ -44,43 +51,16 @@ function Question({
   return (
     <div className="question">
       <h1>{diffQuestions}</h1>
-      <div className="answers">
-        {item.answers.map(
-          (ans: {
-            name: string;
-            id: string;
-            index: number;
-            isCorrect: boolean;
-          }) => {
-            const unicodeA = ans.name;
-            const fixedAnswers = unicodeA
-              .replace(/&quot;/g, '"')
-              .replace(/&#039;/g, "'")
-              .replace(/&amp;/g, "&")
-              .replace(/&oacute;/g, "Ó")
-              .replace(/&uacute;/g, "ú")
-              .replace(/&eacute;/g, "é")
-              .replace(/&prime;/g, "`")
-              .replace(/&lsquo/g, "“")
-              .replace(/&rsquo/g, "”")
-              .replace(/&divide;/g, "/");
-            return (
-              <ButtonGroups
-                fixedAnswers={fixedAnswers}
-                id={ans.id}
-                index={ans.index}
-                isCorrect={ans.isCorrect}
-                answered={answered}
-                choices={choices}
-                setChoices={setChoices}
-                buttonGroup={buttonGroup}
-                setButtonGroup={setButtonGroup}
-                active={buttonGroup[ans.index] === parseInt(ans.id)}
-              />
-            );
-          }
-        )}
-      </div>
+      <ButtonGroups
+        answers={item.answers}
+        answered={answered}
+        choices={choices}
+        setChoices={setChoices}
+        buttonGroup={buttonGroup}
+        setButtonGroup={setButtonGroup}
+        isActive={isActive}
+        setIsActive={setIsActive}
+      />
       <hr
         style={{
           border: "1px solid #D4D8E7",
