@@ -41,11 +41,11 @@ And here is the Figma Design i did by myself: [https://www.figma.com/file/riVamF
 
 > Game Page
 
-![Game Page](/src/images/Game-page.png)
+![Game Page](/src/assets/Game-page.png)
 
 > Result Page
 
-![Result Page](/src/images/result-page.png)
+![Result Page](/src/assets/result-page.png)
 
 ## Development
 

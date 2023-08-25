@@ -10,9 +10,9 @@ function App() {
     <DataProvider>
       <Router>
         <Routes>
-          <Route path="/quiz-project/" element={<StartGamePage />} />
-          <Route path="/quiz-project/game" element={<GamePage />} />
-          <Route path="/*" element={<ErrorPage />} />
+          <Route path="/Quiz-App/" element={<StartGamePage />} />
+          <Route path="/Quiz-App/game" element={<GamePage />} />
+          <Route path="/Quiz-App/*" element={<ErrorPage />} />
         </Routes>
       </Router>
     </DataProvider>
