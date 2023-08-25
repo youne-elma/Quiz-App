@@ -15,6 +15,7 @@ interface DataContextType {
   loading: boolean;
   correctAnswers: string[];
   buttonArray: ButtonArrayType[];
+  resetAndFetchQuestions: () => Promise<void>;
 }
 
 interface DataProviderProps {
@@ -69,6 +70,22 @@ export const DataProvider: React.FC<DataProviderProps> = ({ children }) => {
     }
   };
 
+  const resetAndFetchQuestions = async () => {
+    setQuestions([]); // Clear existing questions
+    setLoading(true);
+    try {
+      const response = await fetch(url);
+      if (response.ok) {
+        const responseData = await response.json();
+        setQuestions(responseData.results);
+      }
+      setLoading(false);
+    } catch (error) {
+      setLoading(false);
+      console.error("Caught Error:", error);
+    }
+  };
+
   useEffect(() => {
     pullData();
   }, [url]);
@@ -95,8 +112,6 @@ export const DataProvider: React.FC<DataProviderProps> = ({ children }) => {
       };
       wrongAnswersArray.push(correctAnswer);
 
-      console.log(wrongAnswersArray);
-
       shuffle(wrongAnswersArray);
       const questionObject = {
         question: item.question,
@@ -105,13 +120,17 @@ export const DataProvider: React.FC<DataProviderProps> = ({ children }) => {
       return bigArray.push(questionObject);
     });
     setButtonArray(bigArray);
-    // console.log(bigArray);
-    // console.log(correctAnswerArray + "correctAnswerArray");
   }, [questions]);
 
   return (
     <DataContext.Provider
-      value={{ questions, loading, buttonArray, correctAnswers }}
+      value={{
+        questions,
+        loading,
+        buttonArray,
+        correctAnswers,
+        resetAndFetchQuestions,
+      }}
     >
       {children}
     </DataContext.Provider>

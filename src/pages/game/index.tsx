@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useData } from "../../context/useDataContext";
 import { Link } from "react-router-dom";
 import LoadingLayout from "../../components/Loading";
@@ -6,7 +6,7 @@ import blop3 from "../../assets/blop3.png";
 import blop4 from "../../assets/blop4.png";
 
 import Question from "./Question";
-// import ButtonGroups from "./ButtonGroups";
+import React from "react";
 
 interface Question {
   category: string;
@@ -27,52 +27,8 @@ function Game() {
   const [answered, setAnswered] = useState<boolean>(false);
   const [count, setCount] = useState<number>(0);
 
-  const { loading, buttonArray, correctAnswers } = useData();
-
-  // const quizQuestions = buttonArray.map((item) => {
-  //   const unicodeQ = item.question;
-  //   const diffQuestions = unicodeQ
-  //     .replace(/&quot;/g, '"')
-  //     .replace(/&#039;/g, "'")
-  //     .replace(/&amp;/g, "&")
-  //     .replace(/&rsquo;/g, "")
-  //     .replace(/&oacute;/g, "Ó")
-  //     .replace(/&uacute;/g, "ú")
-  //     .replace(/&eacute;/g, "é")
-  //     .replace(/&prime;/g, "`")
-  //     .replace(/&lsquo/g, "“")
-  //     .replace(/&rsquo/g, "”")
-  //     .replace(/&divide;/g, "/");
-  //   const answerButtons = item.answers.map((ans) => {
-  //     const unicodeA = ans.name;
-  //     const fixedAnswers = unicodeA
-  //       .replace(/&quot;/g, '"')
-  //       .replace(/&#039;/g, "'")
-  //       .replace(/&amp;/g, "&")
-  //       .replace(/&oacute;/g, "Ó")
-  //       .replace(/&uacute;/g, "ú")
-  //       .replace(/&eacute;/g, "é")
-  //       .replace(/&prime;/g, "`")
-  //       .replace(/&lsquo/g, "“")
-  //       .replace(/&rsquo/g, "”")
-  //       .replace(/&divide;/g, "/");
-  //     return (
-  //       <ButtonGroups
-  //         fixedAnswers={fixedAnswers}
-  //         id={ans.id}
-  //         index={ans.index}
-  //         isCorrect={ans.isCorrect}
-  //         answered={answered}
-  //         choices={choices}
-  //         setChoices={setChoices}
-  //         buttonGroup={buttonGroup}
-  //         setButtonGroup={setButtonGroup}
-  //         active={buttonGroup[ans.index] === parseInt(ans.id)}
-  //       />
-  //     );
-  //   });
-  //   return <Question questions={diffQuestions} answerButtons={answerButtons} />;
-  // });
+  const { loading, buttonArray, correctAnswers, resetAndFetchQuestions } =
+    useData();
 
   const checkAnswers = (correctResp: string[], choice: string[]) => {
     setCount(0);
@@ -89,14 +45,29 @@ function Game() {
     }
   };
 
+  const playAgain = () => {
+    setMessage(false);
+    setChoices(initChoicesArray);
+    setButtonGroup(initButtonGroupArray);
+    setAnswered(false);
+    setCount(0);
+    resetAndFetchQuestions();
+  };
+
+  useEffect(() => {
+    playAgain();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+  console.log("test");
   return (
     <div className="main">
       <img className="blop3" src={blop3} alt="pictureBlop" />
       {loading && <LoadingLayout />}
       <div className="questions">
-        {buttonArray.map((item) => {
+        {buttonArray.map((item, index) => {
           return (
             <Question
+              key={index}
               item={item}
               answered={answered}
               choices={choices}
@@ -119,14 +90,17 @@ function Game() {
           </button>
         )}
         {answered && (
-          <>
+          <React.Fragment>
             <p>You scored {count}/5 correct answers</p>
+            <button type="button" className="checkAnswer" onClick={playAgain}>
+              Play Again
+            </button>
             <Link to="/quiz-project/" className="playAgain">
               <button type="button" className="checkAnswer">
-                Play Again
+                Go Back
               </button>
             </Link>
-          </>
+          </React.Fragment>
         )}
       </div>
       <img className="blop4" src={blop4} alt="pictureBlop" />
