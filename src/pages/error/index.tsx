@@ -9,7 +9,7 @@ function Error() {
       <img src={gifblop1} className="gifBlop1" alt="gif blop 1" />
       <div className="main-text">
         <h1 className="title-quiz">Error 404 page</h1>
-        <Link to="/quiz-project/" className="error-button">
+        <Link to="/Quiz-App/" className="error-button">
           Go back
         </Link>
       </div>

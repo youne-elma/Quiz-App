@@ -95,7 +95,7 @@ function Game() {
             <button type="button" className="checkAnswer" onClick={playAgain}>
               Play Again
             </button>
-            <Link to="/quiz-project/" className="playAgain">
+            <Link to="/Quiz-App/" className="playAgain">
               <button type="button" className="checkAnswer">
                 Go Back
               </button>

@@ -47,6 +47,10 @@ And here is the Figma Design i did by myself: [https://www.figma.com/file/riVamF
 
 ![Result Page](/src/assets/result-page.png)
 
+> Error Page
+
+![Error Page](/src/assets/error-page.gif)
+
 ## Development
 
 To set up this App locally, clone this repo to your desktop and run `npm install` to install all dependencies. Then `npm start` to lunch the App.

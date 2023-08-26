@@ -16,7 +16,7 @@ function StartGame() {
           a project quiz,
           <br /> hurry up and start the quiz
         </p>
-        <Link to="/quiz-project/game" className="start-button">
+        <Link to="/Quiz-App/game" className="start-button">
           start the quiz
         </Link>
       </div>
