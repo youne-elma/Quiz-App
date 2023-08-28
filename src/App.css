@@ -45,9 +45,9 @@ html {
 .parag-quiz {
   text-align: center;
   font-size: 20px;
+  margin-bottom: 20px;
 }
 .start-button {
-  padding: 5% 15%;
   color: white;
   font-size: 18px;
   border-style: none;
@@ -55,6 +55,13 @@ html {
   background-color: var(--color-button);
   text-decoration: none;
   transition: all 0.5s ease;
+  width: 185px;
+  height: 46px;
+  margin-top: 47px;
+}
+.linkStartButton {
+  color: white;
+  text-decoration: none;
 }
 .error-button {
   padding: 5% 15%;
@@ -297,5 +304,45 @@ html {
   }
   .answers-btn {
     padding: 0.3rem;
+  }
+}
+
+/*----------------------------- Start-Game Form ----------------------------------*/
+
+.groupForm {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 5vw;
+  margin-top: 20px;
+}
+.selectForm {
+  display: flex;
+  flex-direction: column;
+  text-align: left;
+  width: 300px;
+}
+.selectForm-text {
+  text-align: left;
+  font-size: 20px;
+  margin-bottom: 10px;
+}
+
+.selectTag {
+  border-radius: 10px;
+  border: 2px solid #4d5b9e;
+  font-size: 18px;
+  color: #293264;
+  height: 40px;
+  padding-left: 15px;
+  padding-right: 15px;
+}
+.selectTag:focus {
+  outline: none;
+}
+
+@media screen and (max-width: 650px) {
+  .groupForm {
+    flex-direction: column;
   }
 }
