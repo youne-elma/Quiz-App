@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { Link } from "react-router-dom";
 
 import blop1 from "../../assets/blop1.png";
@@ -7,7 +8,29 @@ import volleyballIcon from "../../assets/volleyball-icon.png";
 import { useData } from "../../context/useDataContext";
 
 function StartGame() {
-  const { categoriesData } = useData();
+  const { categoriesData, setFormData } = useData();
+
+  const [questionsNumber, setQuestionsNumber] = useState<string>("1");
+  const [selectedDifficulty, setSelectedDifficulty] =
+    useState<string>("Any Difficulty");
+  const [selectedCategory, setSelectedCategory] =
+    useState<string>("Any Category");
+  const [selectedType, setSelectedType] = useState<string>("Any Type");
+
+  const handleSubmit = (event: React.FormEvent<HTMLButtonElement>) => {
+    event.preventDefault();
+
+    const formData = {
+      questionNumber: questionsNumber,
+      categorie: selectedCategory,
+      difficulty: selectedDifficulty,
+      type: selectedType,
+    };
+
+    console.log(formData);
+
+    setFormData(formData);
+  };
 
   return (
     <div className="main start-game">
@@ -27,12 +50,19 @@ function StartGame() {
               type="number"
               min="1"
               id="questionsNumber"
+              value={questionsNumber}
+              onChange={(e) => setQuestionsNumber(e.target.value)}
             />
           </div>
           <div className="selectForm">
             <label className="selectForm-text">Select the difficulty:</label>
-            <select className="selectTag" name="category" id="category">
-              <option selected>Any Category</option>
+            <select
+              className="selectTag"
+              name="category"
+              id="category"
+              onChange={(e) => setSelectedDifficulty(e.target.value)}
+            >
+              <option value="Any Difficulty">Any Difficulty</option>
               <option>Easy</option>
               <option>Medium</option>
               <option>Hard</option>
@@ -42,8 +72,13 @@ function StartGame() {
         <div className="groupForm">
           <div className="selectForm">
             <label className="selectForm-text">Select the Category:</label>
-            <select className="selectTag" name="category" id="category">
-              <option selected>Any Category</option>
+            <select
+              className="selectTag"
+              name="category"
+              id="category"
+              onChange={(e) => setSelectedCategory(e.target.value)}
+            >
+              <option value="Any Category">Any Category</option>
               {categoriesData.map((item) => {
                 return <option key={item.id}>{item.name}</option>;
               })}
@@ -51,14 +86,19 @@ function StartGame() {
           </div>
           <div className="selectForm">
             <label className="selectForm-text">Select the Type:</label>
-            <select className="selectTag" name="category" id="category">
-              <option selected>Any Type</option>
+            <select
+              className="selectTag"
+              name="category"
+              id="category"
+              onChange={(e) => setSelectedType(e.target.value)}
+            >
+              <option value="Any Type">Any Type</option>
               <option>Multiple Choice</option>
               <option>True / False</option>
             </select>
           </div>
         </div>
-        <button type="submit" className="start-button" onClick={}>
+        <button type="submit" className="start-button" onClick={handleSubmit}>
           <Link to="/Quiz-App/game" className="linkStartButton">
             start the quiz
           </Link>

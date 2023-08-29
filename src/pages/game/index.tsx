@@ -58,7 +58,9 @@ function Game() {
     playAgain();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
+
   console.log("test");
+
   return (
     <div className="main">
       <img className="blop3" src={blop3} alt="pictureBlop" />

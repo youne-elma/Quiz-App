@@ -1,6 +1,11 @@
 import React, { ReactNode, createContext, useEffect, useState } from "react";
 import { nanoid } from "nanoid";
 
+interface DataCategories {
+  id: number;
+  name: string;
+}
+
 interface Question {
   category: string;
   type: string;
@@ -10,12 +15,22 @@ interface Question {
   incorrect_answers: string[];
 }
 
+interface FormDataType {
+  questionNumber: string;
+  categorie: string;
+  difficulty: string;
+  type: string;
+}
+
 interface DataContextType {
   questions: Question[];
   loading: boolean;
   correctAnswers: string[];
   buttonArray: ButtonArrayType[];
   resetAndFetchQuestions: () => Promise<void>;
+  categoriesData: DataCategories[];
+  setCategoriesData: React.Dispatch<React.SetStateAction<DataCategories[]>>;
+  setFormData: React.Dispatch<React.SetStateAction<FormDataType>>;
 }
 
 interface DataProviderProps {
@@ -39,12 +54,22 @@ interface ButtonArrayType {
 }
 
 export const DataProvider: React.FC<DataProviderProps> = ({ children }) => {
+  const initialFormData: FormDataType = {
+    questionNumber: "",
+    categorie: "",
+    difficulty: "",
+    type: "",
+  };
+
+  const [formData, setFormData] = useState<FormDataType>(initialFormData);
+  const [categoriesData, setCategoriesData] = useState<DataCategories[]>([]);
   const [questions, setQuestions] = useState<Question[]>([]);
   const [loading, setLoading] = useState(false);
   const [correctAnswers, setCorrectAnswers] = useState<string[]>([]);
   const [buttonArray, setButtonArray] = useState<ButtonArrayType[]>([]);
 
   const url = "https://opentdb.com/api.php?amount=5";
+  const urlCategorie = "https://opentdb.com/api_category.php";
 
   const shuffle = (array: Answer[]) => {
     for (let i = array.length - 1; i > 0; i -= 1) {
@@ -70,8 +95,22 @@ export const DataProvider: React.FC<DataProviderProps> = ({ children }) => {
     }
   };
 
+  const pullDataCategories = async () => {
+    try {
+      const response = await fetch(urlCategorie);
+      if (response.ok) {
+        const responseData = await response.json();
+        setCategoriesData(responseData.trivia_categories);
+      } else {
+        setCategoriesData([]);
+      }
+    } catch (error) {
+      console.error("Caught Error:", error);
+    }
+  };
+
   const resetAndFetchQuestions = async () => {
-    setQuestions([]); // Clear existing questions
+    setQuestions([]);
     setLoading(true);
     try {
       const response = await fetch(url);
@@ -85,6 +124,10 @@ export const DataProvider: React.FC<DataProviderProps> = ({ children }) => {
       console.error("Caught Error:", error);
     }
   };
+
+  useEffect(() => {
+    pullDataCategories();
+  }, [urlCategorie]);
 
   useEffect(() => {
     pullData();
@@ -130,6 +173,9 @@ export const DataProvider: React.FC<DataProviderProps> = ({ children }) => {
         buttonArray,
         correctAnswers,
         resetAndFetchQuestions,
+        categoriesData,
+        setCategoriesData,
+        setFormData,
       }}
     >
       {children}
