@@ -1,4 +1,10 @@
-import React, { ReactNode, createContext, useEffect, useState } from "react";
+import React, {
+  ReactNode,
+  createContext,
+  useEffect,
+  useRef,
+  useState,
+} from "react";
 import { nanoid } from "nanoid";
 
 interface DataCategories {
@@ -31,6 +37,9 @@ interface DataContextType {
   categoriesData: DataCategories[];
   setCategoriesData: React.Dispatch<React.SetStateAction<DataCategories[]>>;
   setFormData: React.Dispatch<React.SetStateAction<FormDataType>>;
+  formData: FormDataType;
+  initButtonGroupArray: number[];
+  initChoicesArray: string[];
 }
 
 interface DataProviderProps {
@@ -68,8 +77,48 @@ export const DataProvider: React.FC<DataProviderProps> = ({ children }) => {
   const [correctAnswers, setCorrectAnswers] = useState<string[]>([]);
   const [buttonArray, setButtonArray] = useState<ButtonArrayType[]>([]);
 
-  const url = "https://opentdb.com/api.php?amount=5";
+  const [initButtonGroupArray, setInitButtonGroupArray] = useState<number[]>(
+    []
+  );
+  const [initChoicesArray, setInitChoicesArray] = useState<string[]>([]);
+
+  const url = useRef("");
   const urlCategorie = "https://opentdb.com/api_category.php";
+  console.log("Test");
+  console.log(formData);
+
+  useEffect(() => {
+    const { questionNumber, categorie, difficulty, type } = formData;
+
+    setInitButtonGroupArray(
+      Array.from({ length: parseInt(questionNumber, 10) }, () => 0)
+    );
+    setInitChoicesArray(
+      Array.from({ length: parseInt(questionNumber, 10) }, () => "")
+    );
+
+    console.log(initButtonGroupArray);
+    console.log(initChoicesArray);
+
+    url.current = `https://opentdb.com/api.php?amount=${questionNumber}`;
+
+    if (
+      questionNumber == "" &&
+      categorie == "" &&
+      difficulty == "" &&
+      type == ""
+    ) {
+      url.current = "";
+    } else if (categorie != "Any Category") {
+      url.current += `&categorie=${categorie}`;
+    } else if (difficulty != "Any Difficulty") {
+      url.current += `&difficulty=${difficulty}`;
+    } else if (type != "Any Type") {
+      url.current += `&type=${type}`;
+    }
+
+    console.log(url.current);
+  }, [formData]);
 
   const shuffle = (array: Answer[]) => {
     for (let i = array.length - 1; i > 0; i -= 1) {
@@ -81,7 +130,7 @@ export const DataProvider: React.FC<DataProviderProps> = ({ children }) => {
   const pullData = async () => {
     setLoading(true);
     try {
-      const response = await fetch(url);
+      const response = await fetch(url.current);
       if (response.ok) {
         const responseData = await response.json();
         setQuestions(responseData.results);
@@ -113,7 +162,7 @@ export const DataProvider: React.FC<DataProviderProps> = ({ children }) => {
     setQuestions([]);
     setLoading(true);
     try {
-      const response = await fetch(url);
+      const response = await fetch(url.current);
       if (response.ok) {
         const responseData = await response.json();
         setQuestions(responseData.results);
@@ -176,6 +225,9 @@ export const DataProvider: React.FC<DataProviderProps> = ({ children }) => {
         categoriesData,
         setCategoriesData,
         setFormData,
+        formData,
+        initButtonGroupArray,
+        initChoicesArray,
       }}
     >
       {children}

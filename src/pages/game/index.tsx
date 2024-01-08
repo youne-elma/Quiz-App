@@ -18,17 +18,23 @@ interface Question {
 }
 
 function Game() {
+  const {
+    loading,
+    buttonArray,
+    correctAnswers,
+    resetAndFetchQuestions,
+    formData,
+    initChoicesArray,
+    initButtonGroupArray,
+  } = useData();
+
   const [message, setMessage] = useState<boolean>(false);
-  const initChoicesArray: string[] = ["", "", "", "", ""];
   const [choices, setChoices] = useState<string[]>(initChoicesArray);
-  const initButtonGroupArray: number[] = [0, 0, 0, 0, 0];
+
   const [buttonGroup, setButtonGroup] =
     useState<number[]>(initButtonGroupArray);
   const [answered, setAnswered] = useState<boolean>(false);
   const [count, setCount] = useState<number>(0);
-
-  const { loading, buttonArray, correctAnswers, resetAndFetchQuestions } =
-    useData();
 
   const checkAnswers = (correctResp: string[], choice: string[]) => {
     setCount(0);
@@ -93,7 +99,9 @@ function Game() {
         )}
         {answered && (
           <React.Fragment>
-            <p>You scored {count}/5 correct answers</p>
+            <p>
+              You scored {count}/{formData.questionNumber} correct answers
+            </p>
             <button type="button" className="checkAnswer" onClick={playAgain}>
               Play Again
             </button>
@@ -105,7 +113,7 @@ function Game() {
           </React.Fragment>
         )}
       </div>
-      <img className="blop4" src={blop4} alt="pictureBlop" />
+      <img className="blop4" src={blop4} />
     </div>
   );
 }

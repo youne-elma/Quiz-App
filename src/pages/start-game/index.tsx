@@ -63,9 +63,9 @@ function StartGame() {
               onChange={(e) => setSelectedDifficulty(e.target.value)}
             >
               <option value="Any Difficulty">Any Difficulty</option>
-              <option>Easy</option>
-              <option>Medium</option>
-              <option>Hard</option>
+              <option value="easy">Easy</option>
+              <option value="medium">Medium</option>
+              <option value="hard">Hard</option>
             </select>
           </div>
         </div>
@@ -80,7 +80,11 @@ function StartGame() {
             >
               <option value="Any Category">Any Category</option>
               {categoriesData.map((item) => {
-                return <option key={item.id}>{item.name}</option>;
+                return (
+                  <option key={item.id} value={item.id}>
+                    {item.name}
+                  </option>
+                );
               })}
             </select>
           </div>
@@ -93,8 +97,8 @@ function StartGame() {
               onChange={(e) => setSelectedType(e.target.value)}
             >
               <option value="Any Type">Any Type</option>
-              <option>Multiple Choice</option>
-              <option>True / False</option>
+              <option value="multiple">Multiple Choice</option>
+              <option value="boolean">True / False</option>
             </select>
           </div>
         </div>

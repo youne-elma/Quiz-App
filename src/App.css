@@ -25,7 +25,6 @@ html {
   justify-content: center;
   align-items: center;
   height: 100%;
-  width: 100vw;
 }
 .start-game {
   height: 100vh;
@@ -113,9 +112,13 @@ html {
 }
 .blop4 {
   position: absolute;
-  right: 0;
-  bottom: 0;
+  top: 50%;
+  bottom: 50%;
+  width: 380px;
+  height: 330px;
+  right: 10%;
 }
+
 .spike-image {
   position: absolute;
   height: 180px;
@@ -144,9 +147,6 @@ html {
   }
   .blop3 {
     height: 20%;
-  }
-  .blop4 {
-    height: 10%;
   }
   .spike-image {
     right: 5%;
